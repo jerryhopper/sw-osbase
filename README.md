@@ -22,7 +22,7 @@ Example bashscript code on how to use this
 <pre>
 #!/bin/bash
 FILE=dietpi.img
-MOUNTPATH=
+MOUNTPATH=/somefolder
 
 # 
 BOOTSTARTSTR=$(sudo fdisk  -l $FILE|grep ".img1"|cut -d' ' -f 8)
