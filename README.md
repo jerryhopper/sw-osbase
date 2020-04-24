@@ -1,6 +1,6 @@
 # sw-osbox-base
 
-OSBox configuration for osbox.
+OSBox dietpi image configuration for osbox.
 
 These file are for use with a DietPi image ( dietpi.com)
 
@@ -21,10 +21,12 @@ Example bashscript code on how to use this
 
 <pre>
 #!/bin/bash
-FILE=dietpi.img
-MOUNTPATH=/somefolder
 
-# 
+FILE=/path/to/dietpi/.img
+MOUNTPATH=/some/folder/used/for/mounting
+GITPATH=/path/to/this/repo
+
+# find bootstart-offset
 BOOTSTARTSTR=$(sudo fdisk  -l $FILE|grep ".img1"|cut -d' ' -f 8)
 FILESYSTEMSTR=$(sudo fdisk -l $FILE|grep ".img1"|cut -d' ' -f 14)
 SECSTARTSTR=$(sudo fdisk -l $FILE|grep -m 2 "Sector size"|cut -d' ' -f 4)
@@ -40,5 +42,7 @@ cp -v -r $GITPATH/boot $MOUNTPATH
 # Unmounting the image
 
 sudo umount $MOUNTPATH
+echo "dietpi image '$FILE' was patched."
+
 </pre>
 
