@@ -4,6 +4,8 @@ OSBox dietpi image configuration for osbox.
 
 These file are for use with a DietPi image ( dietpi.com)
 
+This prepared image will run the osbox binaries (https://github.com/jerryhopper/sw-osbox-bin)
+
 ## instructions: 
 
 Download DietPi image and mount it.
