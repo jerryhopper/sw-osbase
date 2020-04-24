@@ -16,7 +16,7 @@ unmount the image, and flash the image to a sd-card.
 
 The insert the sd-card in your sbc, which will start the installation.
 
-
+Once installed ( this could take a while ) ,  goto http://osbox.local 
 
 ### Example 
 Example bashscript code on how to use this 
