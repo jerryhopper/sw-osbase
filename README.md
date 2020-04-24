@@ -46,3 +46,10 @@ echo "dietpi image '$FILE' was patched."
 
 </pre>
 
+# tested with the following hardware.
+
+NanoPi ZeroPi Allwinner H3 Cortex-A7 1.2GHz quad core 512MB DDR3
+https://dietpi.com/downloads/images/DietPi_NanoPiZeroPi-ARMv7-Buster.7z
+
+NanoPi NEO2 Black Allwinner H5 1.2 GHz quad core (ARMv8) 1024MB DDR3
+https://dietpi.com/downloads/testing/DietPi_NanoPiNEO2Black-ARMv8-Buster.7z
