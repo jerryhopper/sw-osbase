@@ -1,6 +1,6 @@
 # sw-osbox-base
 
-OSBox dietpi image configuration for osbox.
+this is a OSBox dietpi image configuration for osbox.
 
 These file are for use with a DietPi image ( dietpi.com)
 
