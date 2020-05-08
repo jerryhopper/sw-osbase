@@ -1,4 +1,4 @@
-# sw-osbox-base
+# sw-osbox-image
 
 this is a OSBox dietpi image configuration for osbox.
 
