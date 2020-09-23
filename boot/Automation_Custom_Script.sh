@@ -10,5 +10,5 @@
 
 git clone https://github.com/jerryhopper/sw-osbox-bin.git
 
-cd sw-osbox-bin
+cd sw-osbox-bin/extra
 bash install.sh
