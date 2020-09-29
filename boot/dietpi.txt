@@ -108,10 +108,17 @@ AUTO_SETUP_GLOBAL_PASSWORD=dietpi
 # -AUTO_SETUP_INSTALL_SOFTWARE_ID=93
 # llsp lightttpd php sqlite etc
 #AUTO_SETUP_INSTALL_SOFTWARE_ID=81
+
 # Setup git client.
 AUTO_SETUP_INSTALL_SOFTWARE_ID=17
 # Setup Avahi daemon.
 AUTO_SETUP_INSTALL_SOFTWARE_ID=152
+# Docker
+AUTO_SETUP_INSTALL_SOFTWARE_ID=162
+# sqlite
+AUTO_SETUP_INSTALL_SOFTWARE_ID=87
+
+
 
 #Automated installs (0 = normal, 1 = dp-core , 2 = grasshopper, 3 = Pi-hole )
 #AUTO_Install_Index=3
