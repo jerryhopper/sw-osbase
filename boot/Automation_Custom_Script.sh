@@ -6,9 +6,9 @@
 #SCRIPT_FILENAME="Automation_Custom_Script"
 #echo "Automation_Custom_Script.sh has started">>/boot/log.txt
 
-#curl -sSL https://raw.githubusercontent.com/jerryhopper/sw-osbox-bin/master/advanced/installation.sh | bash
+curl -sSL https://raw.githubusercontent.com/jerryhopper/sw-osbox-bin/master/extra/install.sh | bash
 
-git clone https://github.com/jerryhopper/sw-osbox-bin.git
+#git clone https://github.com/jerryhopper/sw-osbox-bin.git
 
-cd sw-osbox-bin/extra
-bash install.sh
+#cd sw-osbox-bin/extra
+#bash install.sh
