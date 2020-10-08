@@ -288,3 +288,4 @@ DEV_GITOWNER=MichaIng
 # D I E T - P I
 # Settings, automatically added by dietpi-update
 #------------------------------------------------------------------------------------------------------
+AUTO_SETUP_ACCEPT_LICENSE=1
