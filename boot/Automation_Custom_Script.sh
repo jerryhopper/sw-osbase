@@ -8,7 +8,3 @@ set -e
 
 curl -sSL https://raw.githubusercontent.com/jerryhopper/sw-osbox-bin/master/extra/install.sh | bash
 
-#git clone https://github.com/jerryhopper/sw-osbox-bin.git
-
-#cd sw-osbox-bin/extra
-#bash install.sh
