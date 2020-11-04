@@ -4,7 +4,7 @@ this is a OSBox image for your singleboardcomputer.
 
 ## instructions: 
 
-Download the appropreate release for your hardware.
+Download the appropreate release for your hardware.  https://github.com/jerryhopper/sw-osbox-image/releases
 
 Unzip the package, and write the img to a sdcard.
 
