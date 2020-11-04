@@ -26,7 +26,8 @@ jobs:
       - name: Run a multi-line script
         run: |
           git clone --depth 1 https://github.com/armbian/build  
+          ls -latr .
           cd build
-          ./compile.sh ../config-base.conf
+          ./compile.sh ./../config-base.conf
           ls -latr ./output/images
-          ls -latr ./
+          ls -latr .
