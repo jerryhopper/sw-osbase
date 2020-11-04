@@ -27,6 +27,6 @@ jobs:
         run: |
           git clone --depth 1 https://github.com/armbian/build  
           cd build
-          ./compile.sh BOARD=nanopineo2black BRANCH=current RELEASE=focal BUILD_MINIMAL=yes BUILD_DESKTOP=no KERNEL_ONLY=no KERNEL_CONFIGURE=prebuilt COMPRESS_OUTPUTIMAGE=sha,gpg,7z
+          ./compile.sh ../config-base.conf
           ls -latr ./output/images
           ls -latr ./
