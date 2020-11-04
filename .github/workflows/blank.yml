@@ -16,7 +16,8 @@ jobs:
   build:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
-
+    env:
+        OSBOX_BOARD: nanopineo2black
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
@@ -32,6 +33,40 @@ jobs:
           ls -latr build/userpatches
           cp ./customize-image.sh ./build/userpatches/customize-image.sh
           cd build
-          ./compile.sh BOARD=nanopineo2black HOST=osbox BRANCH=current RELEASE=focal BUILD_MINIMAL=yes BUILD_DESKTOP=no KERNEL_ONLY=no KERNEL_CONFIGURE=prebuilt COMPRESS_OUTPUTIMAGE=sha,gpg,img
+          ./compile.sh BOARD=${{ env.OSBOX_BOARD }} HOST=osbox BRANCH=current RELEASE=focal BUILD_MINIMAL=yes BUILD_DESKTOP=no KERNEL_ONLY=no KERNEL_CONFIGURE=prebuilt COMPRESS_OUTPUTIMAGE=sha,gpg,img
           ls -latr ./output/images
+          cd ..
+          tar -zcvf osbox-${{ env.OSBOX_BOARD }}.tar.gz ./output/images
           ls -latr .
+      - name: Create a Release
+        uses: actions/create-release@v1.1.4
+        with:
+          # The name of the tag. This should come from the webhook payload, `github.GITHUB_REF` when a user pushes a new tag
+          tag_name: osbox-${{ github.GITHUB_REF }}
+          # The name of the release. For example, `Release v1.0.1`
+          release_name: osbox-${{ env.OSBOX_BOARD }}
+          # Text describing the contents of the tag.
+          #body: # optional
+          # Path to file with information about the tag.
+          #body_path: # optional
+          # `true` to create a draft (unpublished) release, `false` to create a published one. Default: `false`
+          #draft: # optional
+          # `true` to identify the release as a prerelease. `false` to identify the release as a full release. Default: `false`
+          #prerelease: # optional
+          # Any branch or commit SHA the Git tag is created from, unused if the Git tag already exists. Default: SHA of current commit
+          #commitish: # optional
+          # Owner of the repository if it is not the current one
+          #owner: # optional
+          # Repository on which to release.  Used only if you want to create the release on another repo
+          #repo: # optional
+      - name: Upload a Release Asset
+        uses: actions/upload-release-asset@v1.0.2
+        with:
+          # The URL for uploading assets to the release
+          upload_url: osbox-${{ env.OSBOX_BOARD }}.tar.gz
+          # The path to the asset you want to upload
+          asset_path: osbox-${{ env.OSBOX_BOARD }}.tar.gz
+          # The name of the asset you want to upload
+          asset_name: osbox-${{ env.OSBOX_BOARD }}.tar.gz
+          # The content-type of the asset you want to upload. See the supported Media Types here: https://www.iana.org/assignments/media-types/media-types.xhtml for more information
+          asset_content_type: application/gzip
