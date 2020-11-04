@@ -26,7 +26,7 @@ jobs:
       - name: Run a multi-line script
         run: |
           git clone --depth 1 https://github.com/armbian/build  
-          ls -latr .
+          ls -latr 
           cp ./customize-image.sh ./build/userpatches/customize-image.sh
           cd build
           ./compile.sh BOARD=nanopineo2black HOST=osbox BRANCH=current RELEASE=focal BUILD_MINIMAL=yes BUILD_DESKTOP=no KERNEL_ONLY=no KERNEL_CONFIGURE=prebuilt COMPRESS_OUTPUTIMAGE=sha,gpg,img
