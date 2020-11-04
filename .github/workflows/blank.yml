@@ -42,11 +42,14 @@ jobs:
           ls -latr .
       - name: Create a Release
         uses: actions/create-release@v1.1.4
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
         with:
           # The name of the tag. This should come from the webhook payload, `github.GITHUB_REF` when a user pushes a new tag
           tag_name: osbox-${{ github.GITHUB_REF }}
           # The name of the release. For example, `Release v1.0.1`
           release_name: osbox-${{ env.OSBOX_BOARD }}
+          # opts.auth
           # Text describing the contents of the tag.
           #body: # optional
           # Path to file with information about the tag.
