@@ -27,17 +27,17 @@ jobs:
       - name: Run a multi-line script
         run: |
           mkdir -p ./build/output/images
-          touch ./build/output/images/osbox-${{ env.OSBOX_BOARD }}.tar.gz
-          #git clone --depth 1 https://github.com/armbian/build  
-          #ls -latr 
-          #ls -latr build
-          #mkdir -p ./build/userpatches
-          #ls -latr build/userpatches
-          #cp ./customize-image.sh ./build/userpatches/customize-image.sh
-          #cd build
-          #./compile.sh BOARD=${{ env.OSBOX_BOARD }} HOST=osbox BRANCH=current RELEASE=focal BUILD_MINIMAL=yes BUILD_DESKTOP=no KERNEL_ONLY=no KERNEL_CONFIGURE=prebuilt COMPRESS_OUTPUTIMAGE=sha,gpg,img
-          #ls -latr ./output/images
-          #cd ..
+          #touch ./build/output/images/osbox-${{ env.OSBOX_BOARD }}.tar.gz
+          git clone --depth 1 https://github.com/armbian/build  
+          ls -latr 
+          ls -latr build
+          mkdir -p ./build/userpatches
+          ls -latr build/userpatches
+          cp ./customize-image.sh ./build/userpatches/customize-image.sh
+          cd build
+          ./compile.sh BOARD=${{ env.OSBOX_BOARD }} HOST=osbox BRANCH=current RELEASE=focal BUILD_MINIMAL=yes BUILD_DESKTOP=no KERNEL_ONLY=no KERNEL_CONFIGURE=prebuilt COMPRESS_OUTPUTIMAGE=sha,gpg,img
+          ls -latr ./output/images
+          cd ..
           tar -zcvf osbox-${{ env.OSBOX_BOARD }}.tar.gz ./build/output/images
           ls -latr .
       - name: Create Release
@@ -47,7 +47,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ github.ref }}
-          release_name: Release ${{ env.OSBOX_BOARD }} ${{ github.ref }}
+          release_name: Osbox ${{ env.OSBOX_BOARD }}
           draft: false
           prerelease: false
       - name: Upload Release Asset
