@@ -28,6 +28,7 @@ jobs:
           git clone --depth 1 https://github.com/armbian/build  
           ls -latr 
           ls -latr build
+          mkdir -P ./build/userpatches
           ls -latr build/userpatches
           cp ./customize-image.sh ./build/userpatches/customize-image.sh
           cd build
