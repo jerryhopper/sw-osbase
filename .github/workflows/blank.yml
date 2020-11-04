@@ -31,4 +31,4 @@ jobs:
         run: |
           git clone --depth 1 https://github.com/armbian/build  
           cd build
-          ./compile.sh docker BOARD=nanopineo2black BRANCH=current RELEASE=focal BUILD_MINIMAL=yes BUILD_DESKTOP=no KERNEL_ONLY=no KERNEL_CONFIGURE=prebuilt COMPRESS_OUTPUTIMAGE=sha,gpg,img
+          ./compile.sh BOARD=nanopineo2black BRANCH=current RELEASE=focal BUILD_MINIMAL=yes BUILD_DESKTOP=no KERNEL_ONLY=no KERNEL_CONFIGURE=prebuilt COMPRESS_OUTPUTIMAGE=sha,gpg,img
