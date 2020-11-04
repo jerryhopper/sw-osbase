@@ -27,7 +27,9 @@ jobs:
         run: |
           git clone --depth 1 https://github.com/armbian/build  
           ls -latr .
+          cp ./config-example.conf ./build/userpatches/config-example.conf
+          cp ./customize-image.conf ./build/userpatches/customize-image.conf
           cd build
-          ./compile.sh ./../config-base.conf
+          ./compile.sh BOARD=nanopineo2black HOST=osbox BRANCH=current RELEASE=focal BUILD_MINIMAL=yes BUILD_DESKTOP=no KERNEL_ONLY=no KERNEL_CONFIGURE=prebuilt COMPRESS_OUTPUTIMAGE=sha,gpg,7z
           ls -latr ./output/images
           ls -latr .
