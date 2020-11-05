@@ -33,7 +33,7 @@ jobs:
         
       - name: Extract board name
         shell: bash
-        run: source ./config-default.conf && echo "##[set-output name=board;]$(echo $BOARD)"
+        run: source ./config-default.conf && echo "[set-output name=board;]$(echo $BOARD)"
         id: extract_board
 
       - name: Get Armbian build enviroment
