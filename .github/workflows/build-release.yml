@@ -43,15 +43,14 @@ jobs:
 
       - name: Get Armbian build enviroment
         run: |
-          echo "${{ env.OSBOX_BOARD }}"
+          #echo "${{ env.OSBOX_BOARD }}"
           git clone --depth 1 https://github.com/armbian/build
-          ls -latr
+          #ls -latr
       # Runs a set of commands using the runners shell
       - name: Build Armbian
         run: |
           echo "Building for ${{ env.OSBOX_BOARD }}"
-          echo "--> ${{ steps.extract_board.outputs.board }}"
-          ls -latr build
+          #ls -latr build
           # Create userpatches folder
           mkdir -p ./build/userpatches
           #ls -latr build/userpatches
@@ -64,9 +63,9 @@ jobs:
           mkdir -p ./build/output/images
           touch ./build/output/images/dummyfile.txt
           
-          ls -latr ./build/output/images
+          #ls -latr ./build/output/images
           tar -zcvf osbox-${{ env.OSBOX_BOARD }}.tar.gz ./build/output/images
-          ls -latr .
+          #ls -latr .
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
