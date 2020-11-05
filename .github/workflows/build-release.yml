@@ -43,8 +43,6 @@ jobs:
       
       # Runs a set of commands using the runners shell
       - name: Build Armbian
-        with:
-          OSBOX_BOARD: ${{ steps.extract_board.outputs.board }}
         env:
           OSBOX_BOARD: ${{ steps.extract_board.outputs.board }} 
         run: |
@@ -66,6 +64,8 @@ jobs:
           ls -latr ./build/output/images
           tar -zcvf osbox-${{ env.OSBOX_BOARD }}.tar.gz ./build/output/images
           ls -latr .
+        with:
+          OSBOX_BOARD: ${{ steps.extract_board.outputs.board }}
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
