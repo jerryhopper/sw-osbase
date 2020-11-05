@@ -59,10 +59,26 @@ Main() {
 
 
 DownloadUnpack(){
+      # Get the latest version
       LATEST_VERSION=$(curl -s https://api.github.com/repos/${ORG_NAME}/${REPO_NAME}/releases/latest | grep "tag_name" | cut -d'v' -f2 | cut -d'"' -f4)
+      
+      # Check the download url, if it responds with 200
+      DOWNLOAD_CODE=$(curl -L -s -o /dev/null -I -w "%{http_code}" https://github.com/${ORG_NAME}/${REPO_NAME}/archive/v${LATEST_VERSION}.tar.gz)
+      if [ "$DOWNLOAD_CODE" == "200" ];then
+      	echo "Download error!"
+	exit 1
+      fi
+      
+      # Download the file
       curl -L -o ${REPO_NAME}.tar.gz https://github.com/${ORG_NAME}/${REPO_NAME}/archive/v${LATEST_VERSION}.tar.gz
       mkdir -p ${BIN_DIR}
       tar -C ${BIN_DIR} -xvf ${REPO_NAME}.tar.gz --strip 1
+      
+      # Doublecheck if binary is available
+      if [ -f "$BIN_DIR/osbox" ];then
+      	echo "Osbox binary missing!"
+	exit 1
+      fi
 }
 
 
@@ -82,7 +98,7 @@ InstallPreRequisites(){
 
 	#/usr/lib/armbian/armbian-firstrun
 	# SWOOLE
-	log "Cloning & compiling swoole"
+	log "Cloning and compiling swoole"
 	git clone https://github.com/swoole/swoole-src.git && cd swoole-src
 	git checkout v4.5.5
 
