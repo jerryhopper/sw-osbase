@@ -33,16 +33,15 @@ jobs:
         
       - name: Extract board name
         shell: bash
-        run: source ./config-default.conf && echo "[set-output name=board;]$(echo $BOARD)"
+        run: |
+          source ./config-default.conf
+          export OSBOX_BOARD=$BOARD
+          echo "::set-env name=OSBOX_BOARD::$OSBOX_BOARD"          
         id: extract_board
 
       - name: Get Armbian build enviroment
         run: |
-          printf '%s\n' "${{ steps.extract_board.outputs.board }}[@]"
-          echo ${{ steps.extract_board.outputs.board }}
-          printf '%s\n' "${{ steps.extract_board.outputs }}[@]"
-          echo ${{ steps.extract_board.outputs }}
-          echo ${{ steps.extract_board }}
+          echo "${{ env.OSBOX_BOARD }}"
           git clone --depth 1 https://github.com/armbian/build
           ls -latr
       # Runs a set of commands using the runners shell
