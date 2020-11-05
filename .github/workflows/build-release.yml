@@ -39,10 +39,10 @@ jobs:
           cd build
           #./compile.sh
           ##./compile.sh BOARD=${{ env.OSBOX_BOARD }} HOST=osbox BRANCH=current RELEASE=focal BUILD_MINIMAL=yes BUILD_DESKTOP=no KERNEL_ONLY=no KERNEL_CONFIGURE=prebuilt COMPRESS_OUTPUTIMAGE=sha,gpg,img
-          touch ./build/output/images/dummyfile.txt
-          ls -latr ./build/output/images
-          cd ..
-          tar -zcvf osbox-${{ env.OSBOX_BOARD }}.tar.gz ./build/output/images
+          touch ./output/images/dummyfile.txt
+      - name: Creating Archive 
+          ls -latr ./output/images
+          tar -zcvf osbox-${{ env.OSBOX_BOARD }}.tar.gz ./output/images
           ls -latr .
       - name: Create Release
         id: create_release
