@@ -46,10 +46,11 @@ jobs:
         env:
           OSBOX_BOARD: ${{ steps.extract_board.outputs.board }} 
         run: |
+          echo "Building for $OSBOX_BOARD"
           ls -latr build
           # Create userpatches folder
           mkdir -p ./build/userpatches
-          ls -latr build/userpatches
+          #ls -latr build/userpatches
           cp ./customize-image.sh ./build/userpatches/customize-image.sh
           cp ./config-default.conf ./build/userpatches/config-default.conf
           cp ./config-default.conf ./build/userpatches/config-example.conf
