@@ -6,9 +6,17 @@ name: CI
 # events but only for the master branch
 on:
   push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+    branches:
+      - '*'         # matches every branch that doesn't contain a '/'
+      - '!master'   # excludes master
+#      - '*/*'       # matches every branch containing a single '/'
+#      - '**'        # matches every branch
+#  pull_request:
+#    branches: [ master ]
+#on:
+#  push:
+#    branches-ignore:
+#      - master
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -17,7 +25,7 @@ jobs:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
     env:
-        OSBOX_BOARD: nanopineo2black
+        OSBOX_BOARD: ${GITHUB_REF##*/}
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
@@ -38,10 +46,10 @@ jobs:
           cp ./customize-image.sh ./build/userpatches/customize-image.sh
           cp ./config-default.conf ./build/userpatches/config-default.conf
 
-          #./build/compile.sh
+          ./build/compile.sh
           ##./build/compile.sh BOARD=${{ env.OSBOX_BOARD }} HOST=osbox BRANCH=current RELEASE=focal BUILD_MINIMAL=yes BUILD_DESKTOP=no KERNEL_ONLY=no KERNEL_CONFIGURE=prebuilt COMPRESS_OUTPUTIMAGE=sha,gpg,img
-          mkdir -p ./build/output/images
-          touch ./build/output/images/dummyfile.txt
+          #mkdir -p ./build/output/images
+          #touch ./build/output/images/dummyfile.txt
           ls -latr ./build/output/images
           tar -zcvf osbox-${{ env.OSBOX_BOARD }}.tar.gz ./build/output/images
           ls -latr .
