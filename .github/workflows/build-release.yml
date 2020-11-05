@@ -38,6 +38,9 @@ jobs:
 
       - name: Get Armbian build enviroment
         run: |
+          echo ${{ steps.extract_board.outputs.board }}
+          echo ${{ steps.extract_board.outputs }}
+          echo ${{ steps.extract_board }}
           git clone --depth 1 https://github.com/armbian/build
           ls -latr
       # Runs a set of commands using the runners shell
