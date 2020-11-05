@@ -36,8 +36,8 @@ jobs:
           ls -latr build/userpatches
           cp ./customize-image.sh ./build/userpatches/customize-image.sh
           cd build
-          ./compile.sh ./../config-base.conf
-          #./compile.sh BOARD=${{ env.OSBOX_BOARD }} HOST=osbox BRANCH=current RELEASE=focal BUILD_MINIMAL=yes BUILD_DESKTOP=no KERNEL_ONLY=no KERNEL_CONFIGURE=prebuilt COMPRESS_OUTPUTIMAGE=sha,gpg,img
+          #./compile.sh ./../config-base.conf
+          ./compile.sh BOARD=${{ env.OSBOX_BOARD }} HOST=osbox BRANCH=current RELEASE=focal BUILD_MINIMAL=yes BUILD_DESKTOP=no KERNEL_ONLY=no KERNEL_CONFIGURE=prebuilt COMPRESS_OUTPUTIMAGE=sha,gpg,img
       - name: Create release archive
         run: |
           ls -latr ./build/output/images
