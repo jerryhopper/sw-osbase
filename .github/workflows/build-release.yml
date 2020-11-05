@@ -58,10 +58,10 @@ jobs:
           cp ./config-default.conf ./build/userpatches/config-default.conf
           cp ./config-default.conf ./build/userpatches/config-example.conf
 
-          #./build/compile.sh
+          ./build/compile.sh
           ##./build/compile.sh BOARD=${{ env.OSBOX_BOARD }} HOST=osbox BRANCH=current RELEASE=focal BUILD_MINIMAL=yes BUILD_DESKTOP=no KERNEL_ONLY=no KERNEL_CONFIGURE=prebuilt COMPRESS_OUTPUTIMAGE=sha,gpg,img
-          mkdir -p ./build/output/images
-          touch ./build/output/images/dummyfile.txt
+          #mkdir -p ./build/output/images
+          #touch ./build/output/images/dummyfile.txt
           
           #ls -latr ./build/output/images
           tar -zcvf osbox-${{ env.OSBOX_BOARD }}.tar.gz ./build/output/images
