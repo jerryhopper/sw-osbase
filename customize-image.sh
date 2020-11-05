@@ -224,7 +224,8 @@ InstallPreRequisites(){
 	
 	apt-get -y remove build-essential
 	log  "cleaning apt"
-	apt-get clean	
+	apt autoremove && apt clea
+	
 	
 }
 
