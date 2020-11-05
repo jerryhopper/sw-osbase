@@ -36,7 +36,8 @@ jobs:
         run: |
           source ./config-default.conf
           export OSBOX_BOARD=$BOARD
-          echo "::set-env name=OSBOX_BOARD::$OSBOX_BOARD"          
+          echo "OSBOX_BOARD=$BOARD" >> $GITHUB_ENV
+          #echo "::set-env name=OSBOX_BOARD::$OSBOX_BOARD"          
         id: extract_board
 
       - name: Get Armbian build enviroment
