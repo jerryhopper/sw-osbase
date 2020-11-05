@@ -7,8 +7,9 @@ name: CI
 on:
   push:
     branches:
-      - '*'         # matches every branch that doesn't contain a '/'
+      - 'v*'
       - '!master'   # excludes master
+#     - '*'         # matches every branch that doesn't contain a '/'
 #      - '*/*'       # matches every branch containing a single '/'
 #      - '**'        # matches every branch
 #  pull_request:
