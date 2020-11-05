@@ -45,6 +45,7 @@ jobs:
           ls -latr build/userpatches
           cp ./customize-image.sh ./build/userpatches/customize-image.sh
           cp ./config-default.conf ./build/userpatches/config-default.conf
+          cp ./config-default.conf ./build/userpatches/config-example.conf
 
           ./build/compile.sh
           ##./build/compile.sh BOARD=${{ env.OSBOX_BOARD }} HOST=osbox BRANCH=current RELEASE=focal BUILD_MINIMAL=yes BUILD_DESKTOP=no KERNEL_ONLY=no KERNEL_CONFIGURE=prebuilt COMPRESS_OUTPUTIMAGE=sha,gpg,img
