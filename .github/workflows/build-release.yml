@@ -32,17 +32,17 @@ jobs:
       - name: Build Armbian 
         run: |
           ls -latr build
+          # Create userpatches folder
           mkdir -p ./build/userpatches
-          mkdir -p ./output/images
           ls -latr build/userpatches
           cp ./customize-image.sh ./build/userpatches/customize-image.sh
           #cp ./config-default.conf ./build/userpatches/config-default.conf
-          cd build
-          #./compile.sh
-          ##./compile.sh BOARD=${{ env.OSBOX_BOARD }} HOST=osbox BRANCH=current RELEASE=focal BUILD_MINIMAL=yes BUILD_DESKTOP=no KERNEL_ONLY=no KERNEL_CONFIGURE=prebuilt COMPRESS_OUTPUTIMAGE=sha,gpg,img
-          touch ./output/images/dummyfile.txt
-          ls -latr ./output/images
-          tar -zcvf osbox-${{ env.OSBOX_BOARD }}.tar.gz ./output/images
+          
+          #./build/compile.sh
+          ##./build/compile.sh BOARD=${{ env.OSBOX_BOARD }} HOST=osbox BRANCH=current RELEASE=focal BUILD_MINIMAL=yes BUILD_DESKTOP=no KERNEL_ONLY=no KERNEL_CONFIGURE=prebuilt COMPRESS_OUTPUTIMAGE=sha,gpg,img
+          touch ./build/output/images/dummyfile.txt
+          ls -latr ./build/output/images
+          tar -zcvf osbox-${{ env.OSBOX_BOARD }}.tar.gz ./build/output/images
           ls -latr .
       - name: Create Release
         id: create_release
