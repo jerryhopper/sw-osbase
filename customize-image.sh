@@ -20,6 +20,7 @@ BUILD_DESKTOP=$4
 ORG_NAME=jerryhopper
 REPO_NAME=sw-osbox-bin
 BIN_DIR=/usr/local/osbox
+ETC_DIR=/etc/osbox
 
 
 
@@ -74,17 +75,20 @@ DownloadUnpack(){
       mkdir -p ${BIN_DIR}
       tar -C ${BIN_DIR} -xvf ${REPO_NAME}.tar.gz --strip 1
       # Doublecheck if binary is available
-      if [ -f "$BIN_DIR/osbox" ];then
+      if [ ! -f "$BIN_DIR/osbox" ];then
       	echo "Osbox binary missing!"
 	ls -latr ${BIN_DIR}
-      	#exit 1
+      	exit 1
+      fi
+      if [ ! -d $ETC_DIR ];then
+      	mkdir -p $ETC_DIR
+	echo "$BOARD" > "${ETC_DIR}/.board"
       fi
 }
 
 
 InstallPreRequisites(){
 	#
-	#rm /root/.not_logged_in_yet
 	export LANG=C LC_ALL="en_US.UTF-8"
 	export DEBIAN_FRONTEND=noninteractive
 	export APT_LISTCHANGES_FRONTEND=none
@@ -102,12 +106,11 @@ InstallPreRequisites(){
 	git clone https://github.com/swoole/swoole-src.git && cd swoole-src
 	git checkout v4.5.5
 
-	##phpize && ./configure --enable-sockets --enable-openssl && make && make install
+	phpize && ./configure --enable-sockets --enable-openssl && make && make install
 
-	##log "Installing swoole"
-	##echo "extension=swoole.so" >> $(php -i | grep php.ini|grep Loaded | awk '{print $5}')
-	#echo "extension=inotify.so" >> $(php -i | grep php.ini|grep Loaded | awk '{print $5}')
-
+	log "Installing swoole"
+	echo "extension=swoole.so" >> $(php -i | grep php.ini|grep Loaded | awk '{print $5}')
+	
 	log  "Remove unneccesary files"
 	cd .. && rm -rf ./swoole-src
 
