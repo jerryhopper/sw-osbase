@@ -73,11 +73,11 @@ DownloadUnpack(){
       curl -L -o ${REPO_NAME}.tar.gz https://github.com/${ORG_NAME}/${REPO_NAME}/archive/${LATEST_VERSION}.tar.gz
       mkdir -p ${BIN_DIR}
       tar -C ${BIN_DIR} -xvf ${REPO_NAME}.tar.gz --strip 1
-      
       # Doublecheck if binary is available
       if [ -f "$BIN_DIR/osbox" ];then
       	echo "Osbox binary missing!"
-	exit 1
+	ls -latr ${BIN_DIR}
+      	#exit 1
       fi
 }
 
@@ -112,7 +112,7 @@ InstallPreRequisites(){
 	cd .. && rm -rf ./swoole-src
 
 	apt-get -y remove build-essential
-	apt autoremove && apt clean
+	apt -y autoremove && apt clean
 
 
 }
