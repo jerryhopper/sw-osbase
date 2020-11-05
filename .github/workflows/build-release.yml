@@ -37,6 +37,7 @@ jobs:
           source ./config-default.conf
           export OSBOX_BOARD=$BOARD
           echo "OSBOX_BOARD=$BOARD" >> $GITHUB_ENV
+          echo "${{ env.OSBOX_BOARD }}"
           #echo "::set-env name=OSBOX_BOARD::$OSBOX_BOARD"          
         id: extract_board
 
@@ -47,8 +48,6 @@ jobs:
           ls -latr
       # Runs a set of commands using the runners shell
       - name: Build Armbian
-        env:
-          OSBOX_BOARD: ${{ steps.extract_board.outputs.board }} 
         run: |
           echo "Building for ${{ env.OSBOX_BOARD }}"
           echo "--> ${{ steps.extract_board.outputs.board }}"
@@ -73,7 +72,6 @@ jobs:
         uses: actions/create-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          OSBOX_BOARD: ${{ steps.extract_board.outputs.board }} 
         with:
           tag_name: ${{ github.ref }}
           release_name: Osbox ${{ env.OSBOX_BOARD }}
@@ -84,7 +82,6 @@ jobs:
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          OSBOX_BOARD: ${{ steps.extract_board.outputs.board }} 
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
           asset_path: ./osbox-${{ env.OSBOX_BOARD }}.tar.gz
