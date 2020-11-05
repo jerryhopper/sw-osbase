@@ -43,15 +43,15 @@ Main() {
 			log "InstallPreRequisites"
 			InstallPreRequisites
 
-      # Download
-      log "Download the binary"
-      DownloadUnpack
+      			# Download
+      			log "Download the binary"
+		      	DownloadUnpack
+			
+		      	# Run the installer.
+		      	log "Run the installer."
+		      	bash ${BIN_DIR}/extra/install.sh
 
-      # Run the installer.
-      log "Run the installer."
-      bash ${BIN_DIR}/extra/install.sh
-
-      log "Image custormization finished."
+		      	log "Image custormization finished."
 			;;
 	esac
 } # Main
