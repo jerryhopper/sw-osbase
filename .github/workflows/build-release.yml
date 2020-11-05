@@ -43,11 +43,13 @@ jobs:
       
       # Runs a set of commands using the runners shell
       - name: Build Armbian
+        with:
+          OSBOX_BOARD: ${{ steps.extract_board.outputs.board }}
         env:
           OSBOX_BOARD: ${{ steps.extract_board.outputs.board }} 
         run: |
           echo "Building for ${{ env.OSBOX_BOARD }}"
-          echo "yes ${{ steps.extract_branch.outputs.branch }}"
+          echo "--> ${{ steps.extract_board.outputs.board }}"
           ls -latr build
           # Create userpatches folder
           mkdir -p ./build/userpatches
