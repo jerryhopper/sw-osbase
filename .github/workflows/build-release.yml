@@ -48,7 +48,7 @@ jobs:
       # Runs a set of commands using the runners shell
       - name: Prep Armbian
         run: |
-          ./build/compile.sh BOARD=${{ env.OSBOX_BOARD }} "exit 0"
+          ./build/compile.sh BOARD=${{ env.OSBOX_BOARD }} exit 0
       - name: Build Armbian
         run: |
           echo "Building for ${{ env.OSBOX_BOARD }}"
