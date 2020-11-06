@@ -62,11 +62,11 @@ Main() {
 DownloadUnpack(){
       # Get the latest version
       LATEST_VERSION=$(curl -s https://api.github.com/repos/${ORG_NAME}/${REPO_NAME}/releases/latest | grep "tag_name" | cut -d'v' -f2 | cut -d'"' -f4)
-      
+      log "Latest version: ${LATEST_VERSION}"
       # Check the download url, if it responds with 200
       DOWNLOAD_CODE=$(curl -L -s -o /dev/null -I -w "%{http_code}" https://github.com/${ORG_NAME}/${REPO_NAME}/archive/${LATEST_VERSION}.tar.gz)
       if [ "$DOWNLOAD_CODE" != "200" ];then
-      	echo "Download error (${DOWNLOAD_CODE}) https://github.com/${ORG_NAME}/${REPO_NAME}/archive/${LATEST_VERSION}.tar.gz"
+      	log "Download error (${DOWNLOAD_CODE}) https://github.com/${ORG_NAME}/${REPO_NAME}/archive/${LATEST_VERSION}.tar.gz"
 	exit 1
       fi
       
@@ -76,7 +76,7 @@ DownloadUnpack(){
       tar -C ${BIN_DIR} -xvf ${REPO_NAME}.tar.gz --strip 1
       # Doublecheck if binary is available
       if [ ! -f "$BIN_DIR/osbox" ];then
-      	echo "Osbox binary missing!"
+      	log "Osbox binary missing!"
 	ls -latr ${BIN_DIR}
       	exit 1
       fi
