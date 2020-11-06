@@ -7,8 +7,7 @@ name: CI
 on:
   push:
     branches:
-      - 'v*'
-      - '!master' 
+      - 'master' 
 #     - '!master'   # excludes master
 #     - '*'         # matches every branch that doesn't contain a '/'
 #      - '*/*'       # matches every branch containing a single '/'
@@ -47,6 +46,9 @@ jobs:
           git clone --depth 1 https://github.com/armbian/build
           #ls -latr
       # Runs a set of commands using the runners shell
+      - name: Prep Armbian
+        run: |
+          ./build/compile.sh BOARD=${{ env.OSBOX_BOARD }} "exit 0"
       - name: Build Armbian
         run: |
           echo "Building for ${{ env.OSBOX_BOARD }}"
