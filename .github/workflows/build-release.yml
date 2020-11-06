@@ -5,9 +5,12 @@ name: CI
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the master branch
 on:
-  push:
-    branches:
-      - 'master' 
+  release:
+    types: [created]
+#on:
+#  push:
+#    branches:
+#      - 'master' 
 #     - '!master'   # excludes master
 #     - '*'         # matches every branch that doesn't contain a '/'
 #      - '*/*'       # matches every branch containing a single '/'
@@ -29,7 +32,11 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-        
+      - name: Get release
+        id: get_release
+        uses: bruceadams/get-release@v1.2.2
+        env:
+          GITHUB_TOKEN: ${{ github.token }}        
       - name: Extract board name
         shell: bash
         run: |
@@ -83,23 +90,13 @@ jobs:
           #ls -latr ./build/output/images
           #tar -zcvf osbox-${{ env.OSBOX_BOARD }}.tar.gz ./build/output/images
           #ls -latr .
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ github.ref }}
-          release_name: Osbox ${{ env.OSBOX_BOARD }}
-          draft: false
-          prerelease: false
       - name: Upload Release Asset
         id: upload-release-asset
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
+          upload_url: ${{ steps.get_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
           asset_path: ./osbox-${{ env.OSBOX_BOARD }}.tar.gz
           asset_name: osbox-${{ env.OSBOX_BOARD }}.tar.gz
           asset_content_type: application/gzip
