@@ -7,7 +7,7 @@ name: CI
 on:
   push:
     branches:
-      - "dev-*"
+      - "master"
       - '!v*'
       - '!master' 
 #     - '!master'   # excludes master
