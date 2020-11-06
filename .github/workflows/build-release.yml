@@ -44,11 +44,7 @@ jobs:
         run: |
           #echo "${{ env.OSBOX_BOARD }}"
           git clone --depth 1 https://github.com/armbian/build
-          
       # Runs a set of commands using the runners shell
-      - name: Prep Armbian
-        run: |
-          ./build/compile.sh exit 0
       - name: Build Armbian
         run: |
           echo "Building for ${{ env.OSBOX_BOARD }}"
