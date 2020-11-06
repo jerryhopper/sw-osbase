@@ -95,6 +95,7 @@ InstallPreRequisites(){
 	apt-get update
 	apt-get install -y docker docker.io avahi-daemon avahi-utils libsodium23 build-essential libzip5 libedit2 libxslt1.1 nmap curl jq wget git unzip sqlite3 php-dev
 
+
 	# remove new user prompt
 	rm /root/.not_logged_in_yet
 	# change to weak password
