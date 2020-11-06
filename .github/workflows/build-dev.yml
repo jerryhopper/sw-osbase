@@ -8,8 +8,8 @@ on:
   push:
     branches:
       - "master"
-      - '!v*'
-      - '!master' 
+#      - '!v*'
+#      - '!master' 
 #     - '!master'   # excludes master
 #     - '*'         # matches every branch that doesn't contain a '/'
 #      - '*/*'       # matches every branch containing a single '/'
