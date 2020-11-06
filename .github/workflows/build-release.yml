@@ -60,9 +60,20 @@ jobs:
           ## Build armbian.
           ./build/compile.sh
           
+          
+
           ## Renaming the img and sha
-          mv "./build/output/images/*.img" "./build/output/images/osbox-${{ env.OSBOX_BOARD }}.img"
-          mv "./build/output/images/*.sha" "./build/output/images/osbox-${{ env.OSBOX_BOARD }}.sha"  
+          for nam in ./build/output/images/Armbian_*
+          do
+              filename=$(basename -- "$nam")
+              extension="${filename##*.}"
+              filename="${filename%.*}"
+              newname="${{ env.OSBOX_BOARD }}.${extension}"
+              mv $nam $newname
+          done
+          
+          #mv "./build/output/images/*.img" "./build/output/images/osbox-${{ env.OSBOX_BOARD }}.img"
+          #mv "./build/output/images/*.sha" "./build/output/images/osbox-${{ env.OSBOX_BOARD }}.sha"  
           
           ## Create archive
           tar -zcvf osbox-${{ env.OSBOX_BOARD }}.tar.gz ./build/output/images
