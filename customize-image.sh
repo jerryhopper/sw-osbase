@@ -82,8 +82,11 @@ GetRemoteVersion(){
 DownloadUnpack(){
       echo "DownloadUnpack"
       _ORG_NAME=$1
+      echo "_ORG_NAME=$_ORG_NAME"
       _REPO_NAME=$2
+      echo "_REPO_NAME=$_REPO_NAME"
       _LATEST_VERSION=$3
+      echo "_LATEST_VERSION=$_LATEST_VERSION"
       _BIN_DIR=$4
 
       DOWNLOADURL="https://github.com/$1/$2/archive/$_LATEST_VERSION.tar.gz"
