@@ -63,7 +63,7 @@ Main() {
 		      	# Run the installer.
 		      	log "Run the installer."
 		      	bash ${BIN_DIR}/extra/install.sh
-
+			echo "$BOARD">/etc/osbox/.board
 		      	log "Image custormization finished."
 			;;
 	esac
