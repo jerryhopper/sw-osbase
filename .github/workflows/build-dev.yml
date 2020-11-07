@@ -75,7 +75,7 @@ jobs:
               filename=$(basename -- "$nam")
               extension="${filename##*.}"
               filename="${filename%.*}"
-              newname="./build/output/images/${{ env.OSBOX_BOARD }}.$extension"
+              newname="./build/output/images/osbox-${{ env.OSBOX_BOARD }}-version.$extension"
               sudo mv $nam $newname
           done
           
