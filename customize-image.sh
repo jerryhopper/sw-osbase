@@ -39,10 +39,20 @@ Main() {
 		bionic)
 			# your code here
 			;;
+		test)
+			# 
+			log "InstallPreRequisites"
+			#DISABLEDInstallPreRequisites
+			# Download
+      			log "Download the binary"
+			REMOTEVERSION="$(GetRemoteVersion 'jerryhopper' 'sw-osbox-bin')"
+			echo "Remoteversion: ${REMOTEVERSION}"
+			DownloadUnpack "jerryhopper" "sw-osbox-bin" "${REMOTEVERSION}" "/usr/local/osbox"
+			
 		focal)
 			# your code here
 			log "InstallPreRequisites"
-			#InstallPreRequisites
+			InstallPreRequisites
 
       			# Download
       			log "Download the binary"
@@ -51,10 +61,10 @@ Main() {
 			DownloadUnpack "jerryhopper" "sw-osbox-bin" "${REMOTEVERSION}" "/usr/local/osbox"
 			
 		      	# Run the installer.
-		      	#log "Run the installer."
-		      	#bash ${BIN_DIR}/extra/install.sh
+		      	log "Run the installer."
+		      	bash ${BIN_DIR}/extra/install.sh
 
-		      	#log "Image custormization finished."
+		      	log "Image custormization finished."
 			;;
 	esac
 } # Main
