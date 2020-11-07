@@ -97,12 +97,11 @@ DownloadUnpackx(){
 }
 
 GetRemoteVersion(){
-      _ORG_NAME=$1
-      _REPO_NAME=$2
+      echo "https://api.github.com/repos/${1}/$2/releases/latest"
       if ! is_command "jq"; then
-        LATEST_VERSION=$(curl -s https://api.github.com/repos/${_ORG_NAME}/${_REPO_NAME}/releases/latest | grep "tag_name" | cut -d'v' -f2 | cut -d'"' -f4)
+        LATEST_VERSION=$(curl -s https://api.github.com/repos/${1}/$2/releases/latest | grep "tag_name" | cut -d'v' -f2 | cut -d'"' -f4)
       else
-        LATEST_VERSION=$(curl -s https://api.github.com/repos/${_ORG_NAME}/${_REPO_NAME}/releases/latest|jq .tag_name -r )
+        LATEST_VERSION=$(curl -s https://api.github.com/repos/${1}/$2/releases/latest|jq .tag_name -r )
       fi
       echo $LATEST_VERSION
 }
