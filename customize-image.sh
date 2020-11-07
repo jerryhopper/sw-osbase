@@ -41,7 +41,7 @@ Main() {
 			;;
 		focal)
 			# your code here
-			#log "InstallPreRequisites"
+			log "InstallPreRequisites"
 			#InstallPreRequisites
 
       			# Download
@@ -79,16 +79,12 @@ GetRemoteVersion(){
 }
 
 DownloadUnpack(){
-      echo "DownloadUnpack"
       _ORG_NAME=$1
-      echo "_ORG_NAME=$_ORG_NAME"
       _REPO_NAME=$2
-      echo "_REPO_NAME=$_REPO_NAME"
       _LATEST_VERSION=$3
-      echo "_LATEST_VERSION=$_LATEST_VERSION"
       _BIN_DIR=$4
 
-      DOWNLOADURL="https://github.com/$1/$2/archive/$_LATEST_VERSION.tar.gz"
+      DOWNLOADURL="https://github.com/$_ORG_NAME/$_REPO_NAME/archive/$_LATEST_VERSION.tar.gz"
       echo "Download url:$DOWNLOADURL"
       # Check the download url, if it responds with 200
       DOWNLOAD_CODE=$(curl -L -s -o /dev/null -I -w "%{http_code}" $DOWNLOADURL)
