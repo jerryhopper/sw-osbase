@@ -70,7 +70,6 @@ is_command() {
 
 
 GetRemoteVersion(){
-      echo "https://api.github.com/repos/${1}/$2/releases/latest"
       if ! is_command "jq"; then
         LATEST_VERSION=$(curl -s https://api.github.com/repos/${1}/$2/releases/latest | grep "tag_name" | cut -d'v' -f2 | cut -d'"' -f4)
       else
