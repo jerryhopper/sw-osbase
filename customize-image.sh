@@ -46,9 +46,9 @@ Main() {
 
       			# Download
       			log "Download the binary"
-			REMOTEVERSION="$(GetRemoteVersion '${ORG_NAME}' '${REPO_NAME}')"
+			REMOTEVERSION="$(GetRemoteVersion 'jerryhopper' 'sw-osbox-bin')"
 			echo "Remoteversion: ${REMOTEVERSION}"
-			DownloadUnpack "${ORG_NAME}" "${REPO_NAME}" "${REMOTEVERSION}" "/usr/local/osbox"
+			DownloadUnpack "jerryhopper" "sw-osbox-bin" "${REMOTEVERSION}" "/usr/local/osbox"
 			
 		      	# Run the installer.
 		      	#log "Run the installer."
