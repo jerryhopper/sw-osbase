@@ -67,10 +67,33 @@ jobs:
           cp ./config-default.conf ./build/userpatches/config-example.conf
 
           ./build/compile.sh
+          
+          ## Renaming the img and sha
+          echo "Renaming..."
+          for nam in ./build/output/images/Armbian_*
+          do
+              filename=$(basename -- "$nam")
+              extension="${filename##*.}"
+              filename="${filename%.*}"
+              newname="./build/output/images/${{ env.OSBOX_BOARD }}.$(extension)"
+              mv $nam $newname
+          done
+          
+          #mv "./build/output/images/*.img" "./build/output/images/osbox-${{ env.OSBOX_BOARD }}.img"
+          #mv "./build/output/images/*.sha" "./build/output/images/osbox-${{ env.OSBOX_BOARD }}.sha"  
+          
+          ## Create archive
+          tar -zcvf osbox-${{ env.OSBOX_BOARD }}.tar.gz ./build/output/images
+          
+          
+          
+          
+          
+          
           ##./build/compile.sh BOARD=${{ env.OSBOX_BOARD }} HOST=osbox BRANCH=current RELEASE=focal BUILD_MINIMAL=yes BUILD_DESKTOP=no KERNEL_ONLY=no KERNEL_CONFIGURE=prebuilt COMPRESS_OUTPUTIMAGE=sha,gpg,img
           #mkdir -p ./build/output/images
           #touch ./build/output/images/dummyfile.txt
           
           #ls -latr ./build/output/images
-          tar -zcvf osbox-${{ env.OSBOX_BOARD }}.tar.gz ./build/output/images
+          #tar -zcvf osbox-${{ env.OSBOX_BOARD }}.tar.gz ./build/output/images
           #ls -latr .
