@@ -48,7 +48,7 @@ Main() {
 			REMOTEVERSION="$(GetRemoteVersion 'jerryhopper' 'sw-osbox-bin')"
 			echo "Remoteversion: ${REMOTEVERSION}"
 			DownloadUnpack "jerryhopper" "sw-osbox-bin" "${REMOTEVERSION}" "/usr/local/osbox"
-			
+			;;
 		focal)
 			# your code here
 			log "InstallPreRequisites"
