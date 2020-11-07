@@ -7,7 +7,7 @@ name: BUILDVERSIONTEST
 on:
   push:
     branches:
-      - test
+      - master
 #on:
 #  push:
 #    branches:
@@ -45,7 +45,7 @@ jobs:
           echo "${{ env.OSBOX_BOARD }}"
           #echo "::set-env name=OSBOX_BOARD::$OSBOX_BOARD"          
         id: extract_board
-      - name: Testje
+      - name: Version test
         shell: bash
         run: |
           _ORG_NAME="jerryhopper"
@@ -59,14 +59,9 @@ jobs:
             echo "Download error! ( ${DOWNLOAD_CODE} ) "https://github.com/${_ORG_NAME}/${_REPO_NAME}/archive/${_LATEST_VERSION}.tar.gz""
               exit 1
           fi        
-      - name: test customize-image.sh
+      - name: Script test (customize-image.sh)
         shell: bash
         run: |
-          RELEASE="focal"
-          LINUXFAMILY=""
-          BOARD="nanopineo2black"
-          BUILD_DESKTOP="no"
-          
-          bash customize-image.sh "focal" "x" "nanopineo2black" "no" 
+          bash customize-image.sh "test" "x" "nanopineo2black" "no" 
           
           
