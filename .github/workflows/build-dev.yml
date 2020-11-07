@@ -58,10 +58,10 @@ jobs:
       - name: Build Armbian
         run: |
           echo "Building for ${{ env.OSBOX_BOARD }}"
-          #ls -latr build
+          
           # Create userpatches folder
           mkdir -p ./build/userpatches
-          #ls -latr build/userpatches
+          
           cp ./customize-image.sh ./build/userpatches/customize-image.sh
           cp ./config-default.conf ./build/userpatches/config-default.conf
           cp ./config-default.conf ./build/userpatches/config-example.conf
@@ -75,7 +75,7 @@ jobs:
               filename=$(basename -- "$nam")
               extension="${filename##*.}"
               filename="${filename%.*}"
-              newname="./build/output/images/${{ env.OSBOX_BOARD }}.$(extension)"
+              newname="./build/output/images/${{ env.OSBOX_BOARD }}.$extension"
               mv $nam $newname
           done
           
