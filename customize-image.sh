@@ -69,33 +69,6 @@ is_command() {
 }
 
 
-DownloadUnpackx(){
-      # Get the latest version
-      LATEST_VERSION=$(curl -s https://api.github.com/repos/${ORG_NAME}/${REPO_NAME}/releases/latest | grep "tag_name" | cut -d'v' -f2 | cut -d'"' -f4)
-      log "Latest version: ${LATEST_VERSION}"
-      # Check the download url, if it responds with 200
-      DOWNLOAD_CODE=$(curl -L -s -o /dev/null -I -w "%{http_code}" https://github.com/${ORG_NAME}/${REPO_NAME}/archive/${LATEST_VERSION}.tar.gz)
-      if [ "$DOWNLOAD_CODE" != "200" ];then
-      	log "Download error (${DOWNLOAD_CODE}) https://github.com/${ORG_NAME}/${REPO_NAME}/archive/${LATEST_VERSION}.tar.gz"
-	exit 1
-      fi
-      
-      # Download the file
-      curl -L -o ${REPO_NAME}.tar.gz https://github.com/${ORG_NAME}/${REPO_NAME}/archive/${LATEST_VERSION}.tar.gz
-      mkdir -p ${BIN_DIR}
-      tar -C ${BIN_DIR} -xvf ${REPO_NAME}.tar.gz --strip 1
-      # Doublecheck if binary is available
-      if [ ! -f "$BIN_DIR/osbox" ];then
-      	log "Osbox binary missing!"
-	ls -latr ${BIN_DIR}
-      	exit 1
-      fi
-      if [ ! -d $ETC_DIR ];then
-      	mkdir -p $ETC_DIR
-	echo "$BOARD" > "${ETC_DIR}/.board"
-      fi
-}
-
 GetRemoteVersion(){
       echo "https://api.github.com/repos/${1}/$2/releases/latest"
       if ! is_command "jq"; then
@@ -107,6 +80,7 @@ GetRemoteVersion(){
 }
 
 DownloadUnpack(){
+      echo "DownloadUnpack"
       _ORG_NAME=$1
       _REPO_NAME=$2
       _LATEST_VERSION=$3
