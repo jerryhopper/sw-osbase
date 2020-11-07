@@ -113,7 +113,7 @@ DownloadUnpack(){
       _BIN_DIR=$4
 
       DOWNLOADURL="https://github.com/$1/$2/archive/$_LATEST_VERSION.tar.gz"
-      echo $DOWNLOADURL
+      echo "Download url:$DOWNLOADURL"
       # Check the download url, if it responds with 200
       DOWNLOAD_CODE=$(curl -L -s -o /dev/null -I -w "%{http_code}" $DOWNLOADURL)
       if [ "$DOWNLOAD_CODE" != "200" ];then
