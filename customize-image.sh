@@ -46,7 +46,8 @@ Main() {
 
       			# Download
       			log "Download the binary"
-		      	DownloadUnpack
+			REMOTEVERSION="$(GetRemoteVersion '${ORG_NAME}' '${REPO_NAME}')"
+			DownloadUnpack "${ORG_NAME}" "${REPO_NAME}" "${REMOTEVERSION}" "/usr/local/osbox"
 			
 		      	# Run the installer.
 		      	log "Run the installer."
@@ -59,7 +60,7 @@ Main() {
 
 
 
-DownloadUnpack(){
+DownloadUnpackx(){
       # Get the latest version
       LATEST_VERSION=$(curl -s https://api.github.com/repos/${ORG_NAME}/${REPO_NAME}/releases/latest | grep "tag_name" | cut -d'v' -f2 | cut -d'"' -f4)
       log "Latest version: ${LATEST_VERSION}"
@@ -86,6 +87,38 @@ DownloadUnpack(){
       fi
 }
 
+GetRemoteVersion(){
+      _ORG_NAME=$1
+      _REPO_NAME=$2
+      if ! is_command "jq"; then
+        LATEST_VERSION=$(curl -s https://api.github.com/repos/${_ORG_NAME}/${_REPO_NAME}/releases/latest | grep "tag_name" | cut -d'v' -f2 | cut -d'"' -f4)
+      else
+        LATEST_VERSION=$(curl -s https://api.github.com/repos/${_ORG_NAME}/${_REPO_NAME}/releases/latest|jq .tag_name -r )
+      fi
+      echo $LATEST_VERSION
+}
+
+DownloadUnpack(){
+      _ORG_NAME=$1
+      _REPO_NAME=$2
+      _LATEST_VERSION=$3
+      _BIN_DIR=$4
+
+      echo "https://github.com/${_ORG_NAME}/${_REPO_NAME}/archive/${_LATEST_VERSION}.tar.gz"
+      # Check the download url, if it responds with 200
+      DOWNLOAD_CODE=$(curl -L -s -o /dev/null -I -w "%{http_code}" https://github.com/${_ORG_NAME}/${_REPO_NAME}/archive/${_LATEST_VERSION}.tar.gz)
+      if [ "$DOWNLOAD_CODE" != "200" ];then
+        log "Download error! ( ${DOWNLOAD_CODE} ) "https://github.com/${_ORG_NAME}/${_REPO_NAME}/archive/${_LATEST_VERSION}.tar.gz""
+              exit 1
+      fi
+
+      # Download the file
+      curl -s -L -o ${_REPO_NAME}.tar.gz https://github.com/${_ORG_NAME}/${_REPO_NAME}/archive/${_LATEST_VERSION}.tar.gz &> /dev/null
+      mkdir -p ${_BIN_DIR}
+      tar -C ${_BIN_DIR} -xf ${_REPO_NAME}.tar.gz --strip 1 > /dev/null
+      rm -rf ${_REPO_NAME}.tar.gz
+      echo "ok"
+}
 
 InstallPreRequisites(){
 	#
