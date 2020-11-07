@@ -134,8 +134,8 @@ InstallPreRequisites(){
 	export LANG=C LC_ALL="en_US.UTF-8"
 	export DEBIAN_FRONTEND=noninteractive
 	export APT_LISTCHANGES_FRONTEND=none
-	sudo apt-get update
-	sudo apt-get install -y jq git unzip
+	#sudo apt-get update
+	#sudo apt-get install -y jq git unzip
 	#apt-get install -y docker docker.io avahi-daemon avahi-utils libsodium23 build-essential libzip5 libedit2 libxslt1.1 nmap curl jq wget git unzip sqlite3 php-dev
 
 
@@ -160,8 +160,8 @@ InstallPreRequisites(){
 	#cd .. && rm -rf ./swoole-src
 
 
-	sudo apt-get -y remove build-essential
-	sudo apt -y autoremove && apt clean
+	#sudo apt-get -y remove build-essential
+	#sudo apt -y autoremove && apt clean
 
 
 }
