@@ -7,7 +7,7 @@ name: BUILDDEVELOP
 on:
   push:
     branches:
-      - "xmaster"
+      - "master"
 #      - '!v*'
 #      - '!master' 
 #     - '!master'   # excludes master
