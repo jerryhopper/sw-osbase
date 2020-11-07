@@ -53,6 +53,6 @@ jobs:
           LATEST_VERSION=$(curl -s https://api.github.com/repos/${_ORG_NAME}/${_REPO_NAME}/releases/latest|jq .tag_name -r )
           DOWNLOAD_CODE=$(curl -L -s -o /dev/null -I -w "%{http_code}" https://github.com/${_ORG_NAME}/${_REPO_NAME}/archive/${_LATEST_VERSION}.tar.gz)
           if [ "$DOWNLOAD_CODE" != "200" ];then
-            log "Download error! ( ${DOWNLOAD_CODE} ) "https://github.com/${_ORG_NAME}/${_REPO_NAME}/archive/${_LATEST_VERSION}.tar.gz""
+            echo "Download error! ( ${DOWNLOAD_CODE} ) "https://github.com/${_ORG_NAME}/${_REPO_NAME}/archive/${_LATEST_VERSION}.tar.gz""
               exit 1
           fi        
