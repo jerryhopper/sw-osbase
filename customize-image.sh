@@ -111,6 +111,20 @@ DownloadUnpack(){
       echo "ok"
 }
 
+
+InstallSwoole(){
+	# SWOOLE
+	log "Cloning and compiling swoole"
+	git clone https://github.com/swoole/swoole-src.git && cd swoole-src
+	git checkout v4.5.5
+	phpize && ./configure --enable-sockets --enable-openssl && make && make install
+	log "Installing swoole"
+	echo "extension=swoole.so" >> $(php -i | grep php.ini|grep Loaded | awk '{print $5}')
+
+	log  "Remove unneccesary files"
+	cd .. && rm -rf ./swoole-src
+}
+
 InstallPreRequisites(){
 	#
 	export LANG=C LC_ALL="en_US.UTF-8"
@@ -130,16 +144,7 @@ InstallPreRequisites(){
 
 
 
-	# SWOOLE
-	log "Cloning and compiling swoole"
-	git clone https://github.com/swoole/swoole-src.git && cd swoole-src
-	git checkout v4.5.5
-	phpize && ./configure --enable-sockets --enable-openssl && make && make install
-	log "Installing swoole"
-	echo "extension=swoole.so" >> $(php -i | grep php.ini|grep Loaded | awk '{print $5}')
-
-	log  "Remove unneccesary files"
-	cd .. && rm -rf ./swoole-src
+	InstallSwoole
 
 
 	sudo apt-get -y remove build-essential
