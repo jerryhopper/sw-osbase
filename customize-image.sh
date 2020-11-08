@@ -55,14 +55,11 @@ Main() {
 			InstallPreRequisites
 
       			# Download
-      			log "Download the binary"
-			REMOTEVERSION="$(GetRemoteVersion 'jerryhopper' 'sw-osbox-bin')"
-			echo "Remoteversion: ${REMOTEVERSION}"
-			DownloadUnpack "jerryhopper" "sw-osbox-bin" "${REMOTEVERSION}" "/usr/local/osbox"
+      			InstallOsboxBin
 			
 		      	# Run the installer.
 		      	log "Run the installer."
-		      	bash ${BIN_DIR}/extra/install.sh
+		      	#bash ${BIN_DIR}/extra/install.sh
 			mkdir /etc/osbox
 			echo "$BOARD">/etc/osbox/.board
 		      	log "Image custormization finished."
@@ -112,6 +109,13 @@ DownloadUnpack(){
       echo "ok"
 }
 
+InstallOsboxBin(){
+	log "Download the binary"
+	REMOTEVERSION="$(GetRemoteVersion 'jerryhopper' 'sw-osbox-bin')"
+	echo "Remoteversion: ${REMOTEVERSION}"
+	DownloadUnpack "jerryhopper" "sw-osbox-bin" "${REMOTEVERSION}" "/usr/local/osbox"
+				
+}
 
 InstallSwoole(){
 	# SWOOLE
@@ -131,13 +135,13 @@ InstallPreRequisites(){
 	export LANG=C LC_ALL="en_US.UTF-8"
 	export DEBIAN_FRONTEND=noninteractive
 	export APT_LISTCHANGES_FRONTEND=none
-	sudo apt-get update
+	apt-get update
 	#sudo apt-get install -y jq git unzip
 	apt-get install -y docker docker.io avahi-daemon avahi-utils libsodium23 build-essential libzip5 libedit2 libxslt1.1 nmap curl jq wget git unzip sqlite3 php-dev
 
 
 	# remove new user prompt
-	rm /root/.not_logged_in_yet
+	Wrm /root/.not_logged_in_yet
 	# change to weak password
 	# echo "root:password" | chpasswd
 
