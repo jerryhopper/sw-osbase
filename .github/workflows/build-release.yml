@@ -88,7 +88,7 @@ jobs:
               filename=$(basename -- "$nam")
               extension="${filename##*.}"
               filename="${filename%.*}"
-              newname="./build/output/images/osbox-${{ env.OSBOX_BOARD }}-$THETAG.$(extension)"
+              newname="./build/output/images/osbox-${{ env.OSBOX_BOARD }}-$THETAG.$extension"
               mv $nam $newname
           done
           
