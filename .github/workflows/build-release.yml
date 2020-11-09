@@ -89,7 +89,7 @@ jobs:
               extension="${filename##*.}"
               filename="${filename%.*}"
               newname="./build/output/images/osbox-${{ env.OSBOX_BOARD }}-$THETAG.$extension"
-              mv $nam $newname
+              sudo mv $nam $newname
           done
           
           #mv "./build/output/images/*.img" "./build/output/images/osbox-${{ env.OSBOX_BOARD }}.img"
