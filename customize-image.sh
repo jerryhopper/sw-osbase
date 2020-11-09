@@ -24,48 +24,10 @@ ETC_DIR=/etc/osbox
 
 
 
-Main() {
-	case $RELEASE in
-		stretch)
-			# your code here
-			# InstallOpenMediaVault # uncomment to get an OMV 4 image
-			;;
-		buster)
-			# your code here
-			;;
-		bullseye)
-			# your code here
-			;;
-		bionic)
-			# your code here
-			;;
-		test)
-			# 
-			log "InstallPreRequisites"
-			#DISABLEDInstallPreRequisites
-			# Download
-      			log "Download the binary"
-			REMOTEVERSION="$(GetRemoteVersion 'jerryhopper' 'sw-osbox-bin')"
-			echo "Remoteversion: ${REMOTEVERSION}"
-			DownloadUnpack "jerryhopper" "sw-osbox-bin" "${REMOTEVERSION}" "/usr/local/osbox"
-			;;
-		focal)
-			# your code here
-			#log "InstallPreRequisites"
-			#InstallPreRequisites
 
-      			# Download
-      			#InstallOsboxBin
-			
-		      	# Run the installer.
-		      	#log "Run the installer."
-		      	#bash ${BIN_DIR}/extra/install.sh
-			#mkdir /etc/osbox
-			#echo "$BOARD">/etc/osbox/.board
-		      	#log "Image custormization finished."
-			;;
-	esac
-} # Main
+
+
+
 
 # is_command function
 is_command() {
@@ -191,6 +153,55 @@ log(){
 
 
 
+
+
+
+
+
+
+
+Main() {
+	case $RELEASE in
+		stretch)
+			# your code here
+			# InstallOpenMediaVault # uncomment to get an OMV 4 image
+			;;
+		buster)
+			# your code here
+			;;
+		bullseye)
+			# your code here
+			;;
+		bionic)
+			# your code here
+			;;
+		test)
+			# 
+			log "InstallPreRequisites"
+			#DISABLEDInstallPreRequisites
+			# Download
+      			log "Download the binary"
+			REMOTEVERSION="$(GetRemoteVersion 'jerryhopper' 'sw-osbox-bin')"
+			echo "Remoteversion: ${REMOTEVERSION}"
+			DownloadUnpack "jerryhopper" "sw-osbox-bin" "${REMOTEVERSION}" "/usr/local/osbox"
+			;;
+		focal)
+			# your code here
+			#log "InstallPreRequisites"
+			#InstallPreRequisites
+
+      			# Download
+      			InstallOsboxBin
+			
+		      	# Run the installer.
+		      	#log "Run the installer."
+		      	#bash ${BIN_DIR}/extra/install.sh
+			#mkdir /etc/osbox
+			#echo "$BOARD">/etc/osbox/.board
+		      	#log "Image custormization finished."
+			;;
+	esac
+} # Main
 
 
 
