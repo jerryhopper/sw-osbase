@@ -46,7 +46,7 @@ jobs:
           echo "${{ env.OSBOX_BOARD }}"
           #echo "::set-env name=OSBOX_BOARD::$OSBOX_BOARD"          
         id: extract_board
-      - name: Testje
+      - name: Checking sw-osbox-bin download
         shell: bash
         run: |
           _ORG_NAME="jerryhopper"
@@ -91,19 +91,11 @@ jobs:
               newname="./build/output/images/osbox-${{ env.OSBOX_BOARD }}-$THETAG.$extension"
               sudo mv $nam $newname
           done
-          
-          #mv "./build/output/images/*.img" "./build/output/images/osbox-${{ env.OSBOX_BOARD }}.img"
-          #mv "./build/output/images/*.sha" "./build/output/images/osbox-${{ env.OSBOX_BOARD }}.sha"  
-          
+                    
           ## Create archive
           tar -zcvf osbox-${{ env.OSBOX_BOARD }}-$THETAG.tar.gz ./build/output/images
           
-          ##./build/compile.sh BOARD=${{ env.OSBOX_BOARD }} HOST=osbox BRANCH=current RELEASE=focal BUILD_MINIMAL=yes BUILD_DESKTOP=no KERNEL_ONLY=no KERNEL_CONFIGURE=prebuilt COMPRESS_OUTPUTIMAGE=sha,gpg,img
-          #mkdir -p ./build/output/images
-          #touch ./build/output/images/dummyfile.txt
-          #ls -latr ./build/output/images
-          #tar -zcvf osbox-${{ env.OSBOX_BOARD }}.tar.gz ./build/output/images
-          #ls -latr .
+          
       - name: Upload Release Asset
         id: upload-release-asset
         uses: actions/upload-release-asset@v1
