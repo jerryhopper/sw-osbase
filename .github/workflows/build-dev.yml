@@ -7,7 +7,7 @@ name: BUILDDEVELOP
 on:
   workflow_run:
     workflows: ["BUILDVERSIONTEST"]
-    branches: [master]
+    branches: [Xmaster]
     types:
       - completed
 
