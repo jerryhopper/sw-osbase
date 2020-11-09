@@ -7,7 +7,7 @@ name: BUILDVERSIONTEST
 on:
   push:
     branches:
-      - master
+      - xmaster
 #on:
 #  push:
 #    branches:
