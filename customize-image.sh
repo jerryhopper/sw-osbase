@@ -94,16 +94,16 @@ InstallSwoole(){
 
 InstallPreRequisites(){
 	#
-	export LANG=C LC_ALL="en_US.UTF-8"
-	export DEBIAN_FRONTEND=noninteractive
-	export APT_LISTCHANGES_FRONTEND=none
+	#export LANG=C LC_ALL="en_US.UTF-8"
+	#export DEBIAN_FRONTEND=noninteractive
+	#export APT_LISTCHANGES_FRONTEND=none
 	apt-get update
 	#sudo apt-get install -y jq git unzip
 	apt-get install -y docker docker.io avahi-daemon avahi-utils libsodium23 build-essential libzip5 libedit2 libxslt1.1 nmap curl jq wget git unzip sqlite3 php-dev
 
 
 	# remove new user prompt
-	Wrm /root/.not_logged_in_yet
+	#rm /root/.not_logged_in_yet
 	# change to weak password
 	# echo "root:password" | chpasswd
 
@@ -114,8 +114,8 @@ InstallPreRequisites(){
 	InstallSwoole
 
 
-	sudo apt-get -y remove build-essential
-	sudo apt -y autoremove && apt clean
+	#sudo apt-get -y remove build-essential
+	#sudo apt -y autoremove && apt clean
 
 
 }
@@ -196,8 +196,8 @@ Main() {
 		      	# Run the installer.
 		      	#log "Run the installer."
 		      	bash ${BIN_DIR}/extra/install.sh
-			#mkdir /etc/osbox
-			#echo "$BOARD">/etc/osbox/.board
+			mkdir /etc/osbox
+			echo "$BOARD">/etc/osbox/.board
 		      	log "Image custormization finished."
 			;;
 	esac
