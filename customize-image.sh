@@ -114,8 +114,8 @@ InstallPreRequisites(){
 	InstallSwoole
 
 
-	#sudo apt-get -y remove build-essential
-	#sudo apt -y autoremove && apt clean
+	apt-get -y remove build-essential
+	apt -y autoremove && apt clean
 
 
 }
