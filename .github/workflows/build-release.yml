@@ -98,7 +98,6 @@ jobs:
           ## Create archive
           tar -zcvf osbox-${{ env.OSBOX_BOARD }}-$THETAG.tar.gz ./build/output/images
           
-          
           ##./build/compile.sh BOARD=${{ env.OSBOX_BOARD }} HOST=osbox BRANCH=current RELEASE=focal BUILD_MINIMAL=yes BUILD_DESKTOP=no KERNEL_ONLY=no KERNEL_CONFIGURE=prebuilt COMPRESS_OUTPUTIMAGE=sha,gpg,img
           #mkdir -p ./build/output/images
           #touch ./build/output/images/dummyfile.txt
