@@ -103,7 +103,7 @@ InstallPreRequisites(){
 
 
 	# remove new user prompt
-	#rm /root/.not_logged_in_yet
+	rm /root/.not_logged_in_yet
 	# change to weak password
 	# echo "root:password" | chpasswd
 
