@@ -195,7 +195,7 @@ Main() {
 			
 		      	# Run the installer.
 		      	#log "Run the installer."
-		      	bash ${BIN_DIR}/extra/install.sh
+		      	bash ${BIN_DIR}/extra/install-armbian-focal.sh
 			mkdir /etc/osbox
 			echo "$BOARD">/etc/osbox/.board
 		      	log "Image custormization finished."
