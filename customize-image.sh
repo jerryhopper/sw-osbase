@@ -52,16 +52,16 @@ Main() {
 		focal)
 			# your code here
 			log "InstallPreRequisites"
-			InstallPreRequisites
+			#InstallPreRequisites
 
       			# Download
-      			InstallOsboxBin
+      			#InstallOsboxBin
 			
 		      	# Run the installer.
 		      	log "Run the installer."
 		      	#bash ${BIN_DIR}/extra/install.sh
-			mkdir /etc/osbox
-			echo "$BOARD">/etc/osbox/.board
+			#mkdir /etc/osbox
+			#echo "$BOARD">/etc/osbox/.board
 		      	log "Image custormization finished."
 			;;
 	esac
