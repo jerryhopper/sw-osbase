@@ -188,7 +188,7 @@ Main() {
 		focal)
 			# your code here
 			#log "InstallPreRequisites"
-			#InstallPreRequisites
+			InstallPreRequisites
 
       			# Download
       			InstallOsboxBin
