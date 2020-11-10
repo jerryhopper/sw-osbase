@@ -65,7 +65,10 @@ DownloadUnpack(){
 
       # Download the file
       curl -s -L -o ${_REPO_NAME}.tar.gz $DOWNLOADURL &> /dev/null
-      mkdir -p ${_BIN_DIR}
+      if [ ! -d ${_BIN_DIR} ];then
+      	mkdir -p ${_BIN_DIR}
+      fi
+      
       tar -C ${_BIN_DIR} -xf ${_REPO_NAME}.tar.gz --strip 1 > /dev/null
       rm -rf ${_REPO_NAME}.tar.gz
       echo "ok"
