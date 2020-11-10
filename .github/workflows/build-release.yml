@@ -91,10 +91,10 @@ jobs:
               newname="./build/output/images/osbox-${{ env.OSBOX_BOARD }}-$THETAG.$extension"
               sudo mv $nam $newname
           done
-                    
+          cd ./build/output/images          
           ## Create archive
-          tar -zcvf osbox-${{ env.OSBOX_BOARD }}-$THETAG.tar.gz ./build/output/images
-          
+          tar -zcvf osbox-${{ env.OSBOX_BOARD }}-$THETAG.tar.gz .
+          #cd ./../../..
           
       - name: Upload Release Asset
         id: upload-release-asset
