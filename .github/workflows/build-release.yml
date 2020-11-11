@@ -93,7 +93,7 @@ jobs:
           done
           cd ./build/output/images          
           ## Create archive
-          tar -zcvf osbox-${{ env.OSBOX_BOARD }}-$THETAG.tar.gz .
+          sudo tar -zcvf osbox-${{ env.OSBOX_BOARD }}-$THETAG.tar.gz .
           #cd ./../../..
           
       - name: Upload Release Asset
