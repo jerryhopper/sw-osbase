@@ -79,7 +79,8 @@ jobs:
 
           ## Build armbian.
           ./build/compile.sh
-          
+      - name: Build Tarball
+        run: |    
           THETAG="${{ steps.get_release.outputs.tag_name }}"
 
           ## Renaming the img and sha
@@ -88,13 +89,14 @@ jobs:
               filename=$(basename -- "$nam")
               extension="${filename##*.}"
               filename="${filename%.*}"
-              newname="./build/output/images/osbox-${{ env.OSBOX_BOARD }}-$THETAG.$extension"
+              newname="./build/output/images/osbox-$THETAG.$extension"
               sudo mv $nam $newname
           done
           cd ./build/output/images
           
           ## Create archive
-          sudo tar -zcvf osbox-${{ env.OSBOX_BOARD }}-$THETAG.tar.gz ./osbox-${{ env.OSBOX_BOARD }}-$THETAG.img
+          sudo tar -zcvf osbox-$THETAG.tar.gz osbox-$THETAG.img
+          ls -latr
           #cd ./../../..
           
       - name: Upload Release Asset
@@ -104,6 +106,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.get_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps
-          asset_path: ./osbox-${{ env.OSBOX_BOARD }}-${{ steps.get_release.outputs.tag_name }}.tar.gz
-          asset_name: osbox-${{ env.OSBOX_BOARD }}-${{ steps.get_release.outputs.tag_name }}.tar.gz
+          asset_path: ./osbox-${{ steps.get_release.outputs.tag_name }}.tar.gz
+          asset_name: osbox-${{ steps.get_release.outputs.tag_name }}.tar.gz
           asset_content_type: application/gzip
