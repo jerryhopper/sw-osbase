@@ -208,7 +208,7 @@ Main() {
 			  chmod +x /usr/local/osbox/osbox
 			fi
 
-			if [[ ! -x "$file" ]];then
+			if [[ ! -x "/sbin/osbox ]];then
 			  chmod +x /sbin/osbox
 			fi
 
