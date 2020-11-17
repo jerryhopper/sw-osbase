@@ -97,28 +97,18 @@ InstallSwoole(){
 
 InstallPreRequisites(){
 	#
-	#export LANG=C LC_ALL="en_US.UTF-8"
-	#export DEBIAN_FRONTEND=noninteractive
-	#export APT_LISTCHANGES_FRONTEND=none
 	apt-get update
-	
-	###apt-get install -y docker docker.io build-essential 
-	apt-get install -y avahi-daemon avahi-utils libsodium23 libzip5 libedit2 libxslt1.1 nmap curl jq wget git unzip sqlite3 php-dev
-
+	apt-get install -y docker docker.io build-essential avahi-daemon avahi-utils libsodium23 libzip5 libedit2 libxslt1.1 nmap curl jq wget git unzip sqlite3 php-dev
 
 	# remove new user prompt
 	rm /root/.not_logged_in_yet
 	# change to weak password
 	# echo "root:password" | chpasswd
-
 	#/usr/lib/armbian/armbian-firstrun
 
+	InstallSwoole
 
-
-	###InstallSwoole
-
-
-	##apt-get -y remove build-essential
+	apt-get -y remove build-essential
 	apt -y autoremove && apt clean
 
 
