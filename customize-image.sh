@@ -87,7 +87,7 @@ InstallSwoole(){
 	log "Cloning and compiling swoole"
 	git clone https://github.com/swoole/swoole-src.git && cd swoole-src
 	git checkout v4.5.5
-	phpize && ./configure --enable-sockets --enable-openssl
+	! phpize && ./configure --enable-sockets --enable-openssl
 	! make
 	make install
 	log "Installing swoole"
