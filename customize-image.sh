@@ -108,7 +108,7 @@ InstallPreRequisites(){
 	# echo "root:password" | chpasswd
 	#/usr/lib/armbian/armbian-firstrun
 
-	InstallSwoole
+	!InstallSwoole
 
 	apt-get -y remove build-essential
 	apt -y autoremove && apt clean
