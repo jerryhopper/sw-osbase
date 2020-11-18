@@ -89,7 +89,7 @@ InstallSwoole(){
 	git checkout v4.5.5
 	! phpize && ./configure --enable-sockets --enable-openssl
 	! make
-	make install
+	! make install
 	log "Installing swoole"
 	echo "extension=swoole.so" >> $(php -i | grep php.ini|grep Loaded | awk '{print $5}')
 
