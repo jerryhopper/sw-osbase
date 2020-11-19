@@ -88,7 +88,7 @@ InstallSwoole(){
 	git clone https://github.com/swoole/swoole-src.git && cd swoole-src
 	git checkout v4.5.5
 	phpize && ./configure --enable-sockets --enable-openssl
-	!make
+	make
 	make install
 	log "Installing swoole"
 	echo "extension=swoole.so" >> $(php -i | grep php.ini|grep Loaded | awk '{print $5}')
@@ -108,7 +108,7 @@ InstallPreRequisites(){
 	# echo "root:password" | chpasswd
 	#/usr/lib/armbian/armbian-firstrun
 
-	InstallSwoole
+	! InstallSwoole
 
 	apt-get -y remove build-essential
 	apt -y autoremove && apt clean
