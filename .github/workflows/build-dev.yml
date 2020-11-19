@@ -43,6 +43,9 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
+      - name: Install apt-utils
+        shell: bash
+        run: apt-get -y install apt-utils
       - name: Extract board name
         shell: bash
         run: |
