@@ -5,11 +5,15 @@ name: BUILDDEVELOP
 # Controls when the action will run. Triggers the workflow on push or pull request
 # events but only for the master branch
 on:
-  workflow_run:
-    workflows: ["BUILDVERSIONTEST"]
-    branches: [master]
-    types:
-      - completed
+  push:
+    branches:
+      - master
+#on:
+#  workflow_run:
+#    workflows: ["BUILDVERSIONTEST"]
+#    branches: [master]
+#    types:
+#      - completed
 # This is a basic workflow to help you get started with Actions
 
 #on:
