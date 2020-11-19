@@ -74,7 +74,8 @@ jobs:
       - name: Get Armbian build enviroment
         run: |
           #echo "${{ env.OSBOX_BOARD }}"
-          git clone --depth 1 https://github.com/armbian/build
+          # git clone --depth 1 https://github.com/armbian/build
+          git clone --depth 1 https://github.com/jerryhopper/build
       # Runs a set of commands using the runners shell
       - name: Build Armbian
         run: |
