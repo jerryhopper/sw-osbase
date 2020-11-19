@@ -80,7 +80,7 @@ jobs:
           cp ./config-default.conf ./build/userpatches/config-example.conf
 
           ## Build armbian.
-          ./build/compile.sh
+          ./build/compile.sh docker
       - name: Build Tarball
         run: |    
           THETAG="${{ steps.get_release.outputs.tag_name }}"
