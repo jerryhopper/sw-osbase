@@ -10,13 +10,12 @@ on:
     branches: [Xmaster]
     types:
       - completed
+# This is a basic workflow to help you get started with Actions
 
 #on:
 #  push:
 #    branches:
-#      - "master"
-#      - '!v*'
-#      - '!master' 
+#      - '*' 
 #     - '!master'   # excludes master
 #     - '*'         # matches every branch that doesn't contain a '/'
 #      - '*/*'       # matches every branch containing a single '/'
@@ -33,12 +32,13 @@ jobs:
   # This workflow contains a single job called "build"
   build:
     # The type of runner that the job will run on
-    runs-on: ubuntu-latest
+    #runs-on: ubuntu-latest
+    #runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-        
       - name: Extract board name
         shell: bash
         run: |
@@ -48,12 +48,26 @@ jobs:
           echo "${{ env.OSBOX_BOARD }}"
           #echo "::set-env name=OSBOX_BOARD::$OSBOX_BOARD"          
         id: extract_board
-
+      - name: Checking sw-osbox-bin download
+        shell: bash
+        run: |
+          _ORG_NAME="jerryhopper"
+          _REPO_NAME="sw-osbox-bin"
+          _LATEST_VERSION=$(curl -s https://api.github.com/repos/${_ORG_NAME}/${_REPO_NAME}/releases/latest|jq .tag_name -r )
+          echo "https://api.github.com/repos/${_ORG_NAME}/${_REPO_NAME}/releases/latest"
+          echo $_LATEST_VERSION
+          echo "https://github.com/${_ORG_NAME}/${_REPO_NAME}/archive/${_LATEST_VERSION}.tar.gz"
+          DOWNLOAD_CODE=$(curl -L -s -o /dev/null -I -w "%{http_code}" https://github.com/${_ORG_NAME}/${_REPO_NAME}/archive/${_LATEST_VERSION}.tar.gz)
+          if [ "$DOWNLOAD_CODE" != "200" ];then
+            echo "Download error! ( ${DOWNLOAD_CODE} ) "https://github.com/${_ORG_NAME}/${_REPO_NAME}/archive/${_LATEST_VERSION}.tar.gz""
+              exit 1
+          fi
+          echo "OSBOX_ARCHIVE=https://github.com/${_ORG_NAME}/${_REPO_NAME}/archive/${_LATEST_VERSION}.tar.gz" >> $GITHUB_ENV
+      # Runs a set of commands using the runners shell
       - name: Get Armbian build enviroment
         run: |
           #echo "${{ env.OSBOX_BOARD }}"
           git clone --depth 1 https://github.com/armbian/build
-          #ls -latr
       # Runs a set of commands using the runners shell
       - name: Build Armbian
         run: |
@@ -61,39 +75,30 @@ jobs:
           
           # Create userpatches folder
           mkdir -p ./build/userpatches
-          
           cp ./customize-image.sh ./build/userpatches/customize-image.sh
           cp ./config-default.conf ./build/userpatches/config-default.conf
           cp ./config-default.conf ./build/userpatches/config-example.conf
 
+          ## Build armbian.
           ./build/compile.sh
-          
+      - name: Build Tarball
+        run: |    
+          THETAG="${{ steps.get_release.outputs.tag_name }}"
+
           ## Renaming the img and sha
-          echo "Renaming..."
           for nam in ./build/output/images/Armbian_*
           do
               filename=$(basename -- "$nam")
               extension="${filename##*.}"
               filename="${filename%.*}"
-              newname="./build/output/images/osbox-${{ env.OSBOX_BOARD }}-version.$extension"
+              newname="./build/output/images/osbox-$THETAG.$extension"
               sudo mv $nam $newname
           done
-          
-          #mv "./build/output/images/*.img" "./build/output/images/osbox-${{ env.OSBOX_BOARD }}.img"
-          #mv "./build/output/images/*.sha" "./build/output/images/osbox-${{ env.OSBOX_BOARD }}.sha"  
+          cd ./build/output/images
           
           ## Create archive
-          tar -zcvf osbox-${{ env.OSBOX_BOARD }}.tar.gz ./build/output/images
+          sudo tar -zcvf osbox-$THETAG.tar.gz osbox-$THETAG.img
+          ls -latr
+          #cd ./../../..
           
-          
-          
-          
-          
-          
-          ##./build/compile.sh BOARD=${{ env.OSBOX_BOARD }} HOST=osbox BRANCH=current RELEASE=focal BUILD_MINIMAL=yes BUILD_DESKTOP=no KERNEL_ONLY=no KERNEL_CONFIGURE=prebuilt COMPRESS_OUTPUTIMAGE=sha,gpg,img
-          #mkdir -p ./build/output/images
-          #touch ./build/output/images/dummyfile.txt
-          
-          #ls -latr ./build/output/images
-          #tar -zcvf osbox-${{ env.OSBOX_BOARD }}.tar.gz ./build/output/images
-          #ls -latr .
+    
