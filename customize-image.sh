@@ -110,7 +110,7 @@ InstallPreRequisites(){
 
 	! InstallSwoole
 
-	apt-get -y remove build-essential
+	apt-get -y remove build-essential gawk php-dev g++
 	apt -y autoremove && apt clean
 	
 }
