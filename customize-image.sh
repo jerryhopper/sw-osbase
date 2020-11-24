@@ -182,9 +182,11 @@ Main() {
 			;;
 		focal)
 			# your code here
+			echo "${PIPESTATUS[@]}"
 			#log "InstallPreRequisites"
 			InstallPreRequisites
-
+			echo "${PIPESTATUS[@]}"
+			
       			# Download
       			InstallOsboxBin
 			echo "${PIPESTATUS[@]}"
