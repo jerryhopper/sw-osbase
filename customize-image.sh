@@ -187,10 +187,13 @@ Main() {
 
       			# Download
       			InstallOsboxBin
+			echo "${PIPESTATUS[@]}"
 			
 		      	# Run the installer.
 		      	#log "Run the installer."
 		      	bash ${BIN_DIR}/extra/install-armbian-focal.sh
+			echo "${PIPESTATUS[@]}"
+			
 			if [ ! -d /etc/osbox ];then
 			  mkdir /etc/osbox
 			fi
@@ -198,6 +201,7 @@ Main() {
 			
 
 		      	log "Image custormization finished."
+			echo "${PIPESTATUS[@]}"
 			;;
 	esac
 } # Main
