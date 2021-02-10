@@ -7,7 +7,7 @@ name: BUILDDEVELOP
 on:
   push:
     branches:
-      - master
+      - odroidc4
 #on:
 #  workflow_run:
 #    workflows: ["BUILDVERSIONTEST"]
